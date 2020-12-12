@@ -31,7 +31,7 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-Vue.component('ithem-list', require('./components/ithem-list .vue').default);
+Vue.component('ithem-list', require('./components/ithem-list.vue').default);
 Vue.component('chtothis', require('./components/chtothis.vue').default);
 Vue.component('map-content', require('./components/map-content.vue').default);
 Vue.component('navbar', require('./components/navbar.vue').default);
