@@ -1,7 +1,7 @@
 <template>
     <mdb-card class="mycard">
         <mdb-card-body>
-            <mdb-card-title class="title-card">Благотворительная акция</mdb-card-title>
+            <mdb-card-title class="title-card">Б</mdb-card-title>
             <mdb-card-text class="text-card">
                 <p class="mdb-card-text-item"><b>Категория:</b> Животные</p>
                 <p class="mdb-card-text-item item-date"><b>Дата:</b> дд.мм.гг</p>
