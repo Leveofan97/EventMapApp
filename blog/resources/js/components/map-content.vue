@@ -42,9 +42,6 @@
             centerUpdated (center) {
             this.center = center;
             },
-            //boundsUpdated (bounds) {
-            //this.bounds = bounds;
-            //}
         }
     }
 </script>

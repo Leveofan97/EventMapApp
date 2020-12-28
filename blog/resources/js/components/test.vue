@@ -13,7 +13,7 @@
 
             <mdb-navbar-nav right>
                 <mdb-nav-item href="#">Регистрация</mdb-nav-item>
-                <mdb-nav-item href="#"><login></login></mdb-nav-item>
+                <mdb-nav-item href="#">Вход</mdb-nav-item>
             </mdb-navbar-nav>
         </mdb-navbar-toggler>
     </mdb-navbar>
@@ -74,7 +74,6 @@ mdb-navbar{
 <script>
 
 import { mdbNavbar, mdbNavbarBrand, mdbNavbarToggler, mdbNavbarNav, mdbNavItem, mdbDropdown, mdbDropdownMenu, mdbDropdownToggle, mdbInput, mdbDropdownItem } from 'mdbvue';
-import Login from './login.vue';
 export default {
     name: 'NavbarPage',
     components: {

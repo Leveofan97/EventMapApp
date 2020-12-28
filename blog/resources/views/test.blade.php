@@ -7,9 +7,7 @@
     </head>
     <body>
         <div id="app">
-            <navbar></navbar>
-            <chtothis></chtothis>            
-            <v-footer></v-footer>
+            <test/>
         </div>        
         <script type="text/javascript" src="js/app.js"></script>
     </body>
