@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ff66f4f-b91a-47b3-b73b-62595bf0fa65" name="Default Changelist" comment="Add Login Controller">
-      <change beforePath="$PROJECT_DIR$/blog/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/blog/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/database/migrations/2020_12_10_112528_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog/database/migrations/2020_12_10_112528_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/resources/js/components/map-content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/blog/resources/js/components/map-content.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/resources/js/components/navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/blog/resources/js/components/navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/resources/js/components/v-footer.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="6ff66f4f-b91a-47b3-b73b-62595bf0fa65" name="Default Changelist" comment="Add Login Controller" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -169,6 +157,7 @@
       <workItem from="1608989349374" duration="1794000" />
       <workItem from="1609010725530" duration="1847000" />
       <workItem from="1609170586760" duration="2166000" />
+      <workItem from="1609180255982" duration="320000" />
     </task>
     <servers />
   </component>

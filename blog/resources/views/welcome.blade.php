@@ -7,10 +7,11 @@
     </head>
     <body>
         <div id="app">
+            <map-content></map-content>
             <navbar></navbar>
-            <chtothis></chtothis>            
-            <v-footer></v-footer>
-        </div>        
+            <sidebar-map></sidebar-map>
+        </div>
         <script type="text/javascript" src="js/app.js"></script>
     </body>
 </html>
+
