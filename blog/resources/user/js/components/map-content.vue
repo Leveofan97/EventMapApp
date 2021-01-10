@@ -1,27 +1,30 @@
 <template>
-                    <div class="map">
-                        <l-map
-                                style="height: 100%; width: 100%"
-                                :zoom="zoom"
-                                :center="center"
-                                @update:zoom="zoomUpdated"
-                                @update:center="centerUpdated">
-                            <l-marker :lat-lng="markerLatLng" > <l-popup>Тут что-то происходит</l-popup> </l-marker>
-
-                            <l-tile-layer :url="url"></l-tile-layer>
-                        </l-map>
-                    </div>
+    <div class="map">
+        <TheAuth v-if="$store.state.authShow"/>
+        <l-map
+                style="height: 100%; width: 100%; z-index:-1"
+                :zoom="zoom"
+                :center="center"
+                @update:zoom="zoomUpdated"
+                @update:center="centerUpdated">
+            <l-marker :lat-lng="markerLatLng" > <l-popup>Тут что-то происходит</l-popup> </l-marker>
+            <l-control-zoom position="bottomright"  ></l-control-zoom>
+            <l-tile-layer :url="url"></l-tile-layer>
+        </l-map>
+    </div>
 </template>
 
 <script>
-    import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
+    import {LMap, LTileLayer, LMarker, LPopup, LControlZoom} from 'vue2-leaflet';
     export default
     {
+        name: "mapContent",
         components: {
             LMap,
             LTileLayer,
             LMarker,
             LPopup,
+            LControlZoom
         },
         data () {
                 return {
@@ -50,8 +53,6 @@
     .map
     {
         position: fixed;
-        margin-top:2.8em;
-        margin-left: 17.9em;
         width: 100%;
         height: 100%;
     }

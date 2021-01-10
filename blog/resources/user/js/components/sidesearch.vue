@@ -28,5 +28,7 @@ export default {
     margin-left:1em;
     margin-bottom: 0.3em;
 }
-
+input{
+    background: red;
+}
 </style>

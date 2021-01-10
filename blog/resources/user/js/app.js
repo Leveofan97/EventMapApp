@@ -4,13 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
+import Vue from "vue";
 import 'leaflet/dist/leaflet.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdbvue/lib/css/mdb.min.css';
-
 import { Icon } from 'leaflet';
+
+import store from "@/user/js/store/store";
+//import router from "@/user/js/router";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -31,19 +32,57 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('content', require('./components/sidebar.vue').default);
+Vue.component('headside', require('./components/headside.vue').default);
 Vue.component('ithem-list', require('./components/ithem-list.vue').default);
-Vue.component('chtothis', require('./components/chtothis.vue').default);
 Vue.component('map-content', require('./components/map-content.vue').default);
 Vue.component('navbar', require('./components/navbar.vue').default);
-Vue.component('sidebar-map', require('./components/sidebar-map.vue').default);
-// Vue.component('contentbody', require('./components/contentbody.vue').default);
-
+Vue.component('sidesearch', require('./components/sidesearch.vue').default);
+Vue.component('TheAuth', require('./components/auth/TheAuth.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import App from './components/App';
+window.app = new Vue({
+    el: "#app",
+    store: store,
+    //router: router,
+    components: {},
+    render: h => h(App)
+});
+/*
 const app = new Vue({
     el: '#app',
-});
+});*/
+/*
+import Vue from "vue";
+import 'leaflet/dist/leaflet.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbvue/lib/css/mdb.min.css';
+import { Icon } from 'leaflet';
+
+//import store from "@/user/js/store/store";
+
+Vue.component('ithem-list', require('./components/ithem-list.vue').default);
+Vue.component('chtothis', require('./components/chtothis.vue').default);
+Vue.component('map-content', require('./components/map-content.vue').default);
+
+Vue.component('v-footer', require('./components/v-footer.vue').default);
+
+
+
+import App from './components/App';
+
+Vue.component('navbar', require('./components/navbar.vue').default);
+Vue.component('authform', require('./components/authform.vue').default);
+//ue.component('TheAuth', require('./components/TheAuth.vue').default);
+
+window.app = new Vue({
+    el: "#app",
+
+    //router: router,
+    //components: {},
+    render: h => h(App)
+});*/
