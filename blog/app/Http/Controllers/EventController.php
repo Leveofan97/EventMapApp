@@ -18,10 +18,10 @@ class EventController extends Controller
 
              $event = Event::create([
                 'name' => $request['name'],
-                //'address' => $request['address'],
-                //'coordinates' => $request['coordinates'],
+                'address' => $request['address'],
+                'coordinates' => $request['coordinates'],
                 'full_description' => $request['full_description'],
-                //'short_description' => $request['short_description'],
+                'short_description' => $request['short_description'],
                 'max_people_count' => $request['max_people_count'],
                 'start_at' => $request['start_at'],
                 'finish_at' => $request['finish_at'],
