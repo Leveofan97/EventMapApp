@@ -1,5 +1,5 @@
 <template>
-    <mdb-container>
+    <div>
         <div class="sidebar_map">
             <headside></headside>
             <sidesearch></sidesearch>
@@ -16,10 +16,8 @@
                     <li><ithem-list></ithem-list></li>
                 </ul>
             </div>
-
         </div>
-        <v-footer></v-footer>
-    </mdb-container>
+    </div>
 </template>
 
 <style>
@@ -39,14 +37,20 @@
 </style>
 
 <script>
-import { mdbIcon, mdbFormInline, mdbInput } from 'mdbvue';
+import { mdbIcon, mdbFormInline, mdbInput, mdbContainer, mdbRow, mdbCol } from 'mdbvue';
 import Headside from "./headside";
+import sidesearch from "./sidesearch";
 export default {
+    name: "Sidebar",
     components: {
         Headside,
+        sidesearch,
         mdbIcon,
         mdbFormInline,
-        mdbInput
+        mdbInput,
+        mdbContainer,
+        mdbRow,
+        mdbCol
     }
 }
 </script>

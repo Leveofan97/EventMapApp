@@ -10,9 +10,12 @@
                 <mdb-nav-item href="#">Список встреч</mdb-nav-item>
             </mdb-navbar-nav>
 
-            <mdb-navbar-nav right>
-                <mdb-nav-item href="#">Регистрация</mdb-nav-item>
-                <mdb-nav-item href="#">Вход</mdb-nav-item>
+            <mdb-navbar-nav right v-if="$store.state.auth.id != null">
+                <mdb-nav-item>{{$store.state.auth.firstName}} {{$store.state.auth.lastName}}</mdb-nav-item>
+            </mdb-navbar-nav>
+            <mdb-navbar-nav right v-else>
+                <mdb-nav-item >Регистрация</mdb-nav-item>
+                <mdb-nav-item @click="authReq">Вход</mdb-nav-item>
             </mdb-navbar-nav>
         </mdb-navbar-toggler>
     </mdb-navbar>
@@ -25,7 +28,7 @@
 
 }
 .indigo{
-background-color: #343A48 !important;
+    background-color: #343A48 !important;
 }
 .navbar{
     font-family: Trebuchet MS;
@@ -52,7 +55,12 @@ export default {
         mdbDropdownToggle,
         mdbDropdownItem,
         mdbInput
-    }
+    },
+    methods: {
+        authReq () {
+            this.$store.commit('authReq')
+        },
+    },
 }
 </script>
 

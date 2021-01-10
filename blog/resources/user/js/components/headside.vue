@@ -30,7 +30,7 @@
 </style>
 <script>
 export default {
-name: "headside"
+    name: "headside"
 }
 </script>
 
