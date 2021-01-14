@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  app:
+    image: enas8663/eventmap.php
+    restart: unless-stopped
+    volumes:
+      - storage:/var/www/storage
+      - public_storage:/var/www/storage/app/public
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    command: "--innodb_use_native_aio=0 --default-authentication-plugin=mysql_native_password"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - database:/var/lib/mysql
+
+  nginx:
+    image: enas8663/eventmap.nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - public_storage:/var/www/public/storage
+    depends_on:
+      - app
+
+#  redis:
+#    image: redis:rc-alpine
+#    restart: unless-stopped
+
+volumes:
+  database:
+  storage:
+  public_storage:

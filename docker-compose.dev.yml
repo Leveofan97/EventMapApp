@@ -1,0 +1,49 @@
+version: '3.5'
+
+services:
+  app:
+    image: enas8663/eventmap.php
+    build:
+      context: .
+      dockerfile: build/php/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./blog:/var/www
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    command: "--innodb_use_native_aio=0 --default-authentication-plugin=mysql_native_password"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+
+  nginx:
+    image: enas8663/eventmap.nginx
+    build:
+      context: .
+      dockerfile: build/nginx/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./blog:/var/www
+    depends_on:
+      - app
+
+#  redis:
+#    image: redis:rc-alpine
+#    restart: unless-stopped
+
+volumes:
+  database:
+  storage:
+  public_storage:
