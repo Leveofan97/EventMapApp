@@ -1,7 +1,7 @@
 ## Dev run
 
 1. `docker-compose -f docker-compose.dev.yml up -d`
-2. `docker exec eventmapproject_app_1 migrate --seed`
+2. `docker exec eventmapproject_app_1 php artisan migrate --seed`
 3. `cp ./blog/.env.example ./blog/.env`
 
 ## Production build

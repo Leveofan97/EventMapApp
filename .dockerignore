@@ -3,3 +3,4 @@ blog/vendor
 blog/.env
 **/Dockerfile
 blog/public/storage
+.git
