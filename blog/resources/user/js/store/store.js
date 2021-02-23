@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     state: {
         ready: true,
         authShow: false,
+        regShow: false,
     },
     modules: {
         auth//, sidebar, statuses, goods,
@@ -20,7 +21,14 @@ const store = new Vuex.Store({
         setReady(state, val) {
             state.ready = val;
         },
-        authReq: state => state.authShow = !state.authShow
+        authReq(state) {
+            if(state.regShow) state.regShow = !state.regShow;
+            state.authShow = !state.authShow;
+        },
+        regReq(state) {
+            if(state.authShow) state.authShow = !state.authShow;
+            state.regShow = !state.regShow;
+        },
     },
     actions: {
         /*    async fetchDashboard(context) {

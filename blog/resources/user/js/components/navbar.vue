@@ -14,7 +14,7 @@
                 <mdb-nav-item>{{$store.state.auth.firstName}} {{$store.state.auth.lastName}}</mdb-nav-item>
             </mdb-navbar-nav>
             <mdb-navbar-nav right v-else>
-                <mdb-nav-item >Регистрация</mdb-nav-item>
+                <mdb-nav-item @click="regReq">Регистрация</mdb-nav-item>
                 <mdb-nav-item @click="authReq">Вход</mdb-nav-item>
             </mdb-navbar-nav>
         </mdb-navbar-toggler>
@@ -59,7 +59,11 @@ export default {
     methods: {
         authReq () {
             this.$store.commit('authReq')
+            //this.$router.push({name: "/login"});
         },
+        regReq () {
+            this.$store.commit('regReq')
+        }
     },
 }
 </script>

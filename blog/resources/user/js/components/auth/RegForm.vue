@@ -1,31 +1,3 @@
-<!--
-<template>
-    <div class="auth-form-wrap">
-        <div class="bg-blockf"></div>
-        <div class="bg-blocks"></div>
-        <form class="auth-form" @submit.prevent="submit">
-            <div class="auth-title">
-                <hr/>
-                <h4>Вход</h4>
-                <hr/>
-            </div>
-
-            <input placeholder="E-mail" type="email" id="email" autofocus v-model="d_auth.username">
-            <input placeholder="Пароль" type="password" id="password" v-model="d_auth.password">
-
-            <form-errors class="mb-3"
-                         v-if="d_error"
-                         :error="d_error"
-            />
-            <div class="d-flex align-items-center justify-content-center" style="width: 100%">
-                <button type="submit">Войти</button>
-                <loading-component v-if="d_loading"/>
-            </div>
-
-            <a href="#">Забыли пароль?</a>
-        </form>
-    </div>
-</template>-->
 <template>
     <div class="auth-form-wrap">
         <div class="bg-blocks">
@@ -33,23 +5,31 @@
                 <form class="auth-form" @submit.prevent="submit">
                     <div class="auth-title">
                         <hr/>
-                        <h4>Вход</h4>
+                        <h4>Регистрация</h4>
                         <hr/>
                     </div>
 
-                    <input placeholder="E-mail" type="email" id="email" autofocus v-model="d_auth.username">
-                    <input placeholder="Пароль" type="password" id="password" v-model="d_auth.password">
+                    <div class="input-container">
+                        <div class="column">
+                            <input placeholder="Имя" type="text" id="name" autofocus v-model="d_auth.name"/>
+                            <input placeholder="Фамилия" type="text" id="surname" autofocus v-model="d_auth.surname"/>
+                            <input placeholder="Отчество" type="text" id="patronymic" autofocus v-model="d_auth.patronymic"/>
+                        </div>
+                        <div class="column">
+                            <input placeholder="E-mail" type="email" id="email" autofocus v-model="d_auth.email"/>
+                            <input placeholder="Логин" type="text" id="login" autofocus v-model="d_auth.username"/>
+                            <input placeholder="Пароль" type="password" id="password" autofocus v-model="d_auth.password"/>
+                        </div>
+                    </div>
 
                     <form-errors class="mb-3"
                                  v-if="d_error"
                                  :error="d_error"
                     />
                     <div class="d-flex align-items-center justify-content-center" style="width: 100%; margin-top:1em;">
-                        <button type="submit">Войти</button>
+                        <button type="submit">Зарегистрироваться</button>
                         <loading-component v-if="d_loading"/>
                     </div>
-
-                    <a href="#" style="margin-top:0.5em;">Забыли пароль?</a>
                 </form>
             </div>
         </div>
@@ -62,11 +42,15 @@
     import FormErrors from "@/user/js/components/utils/FormErrors";
 
     export default {
-        name: "TheAuth",
+        name: "RegForm",
         components: {FormErrors, LoadingComponent},
         data() {
             return {
                 d_auth: {
+                    name: null,
+                    surname: null,
+                    patronymic: null,
+                    email: null,
                     username: null,
                     password: null,
                 },
@@ -81,13 +65,12 @@
                 this.d_error = null;
                 this.d_loading = true;
                 try {
-                    await this.$store.dispatch("auth/login", this.d_auth);
-                    //this.$router.push({name: "/showevent"});
+                    await this.$store.dispatch("auth/register", this.d_auth);
                 } catch (e) {
                     this.d_error = e;
                 }
                 this.d_loading = false;
-                if(this.d_error == null) this.$store.commit('authReq')
+                if(this.d_error == null) this.$store.commit('regReq')
             }
         }
     }
@@ -103,6 +86,15 @@
         height: 100%;
         backdrop-filter: blur(4px);
     }
+
+    .bg-blocks {
+        width: 45%;
+        background: #343A48;
+        border-radius: 5px;
+        transform: rotate(-7.53deg);
+        z-index: 1;
+    }
+
     .bg-blockf {
         width: 100%;
         height: 100%;
@@ -110,14 +102,6 @@
         border-radius: 5px;
         transform: rotate(2.85deg);
         z-index: 2;
-    }
-
-    .bg-blocks {
-        width: 40%;
-        background: #343A48;
-        border-radius: 5px;
-        transform: rotate(-7.53deg);
-        z-index: 1;
     }
 
     .auth-form {
@@ -139,12 +123,27 @@
             display: flex;
             justify-content: center;
             width: 100%;
+            margin-bottom: 3%;
         }
         .auth-title hr{
             width: 70%;
             border-top: 1.5px solid black;
             margin-left: 2em;
             margin-right: 2em;
+        }
+
+        .input-container {
+            display: flex;
+            margin-bottom: 3%;
+
+            .column{
+                width: 50%;
+                text-align: center;
+            }
+
+            input{
+                width: 75%;
+            }
         }
 
         input {
@@ -167,7 +166,7 @@
         }
 
         input:focus {
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
             outline:none;
         }
         input:hover {

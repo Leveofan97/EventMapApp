@@ -1,6 +1,8 @@
 <template>
     <div class="map">
+        <!--<router-view/>-->
         <TheAuth v-if="$store.state.authShow"/>
+        <RegForm v-if="$store.state.regShow"/>
         <l-map
                 style="height: 100%; width: 100%; z-index:-1"
                 :zoom="zoom"

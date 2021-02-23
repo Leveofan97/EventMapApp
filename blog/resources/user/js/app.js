@@ -11,7 +11,7 @@ import 'mdbvue/lib/css/mdb.min.css';
 import { Icon } from 'leaflet';
 
 import store from "@/user/js/store/store";
-//import router from "@/user/js/router";
+import router from "@/user/js/router";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -39,6 +39,7 @@ Vue.component('map-content', require('./components/map-content.vue').default);
 Vue.component('navbar', require('./components/navbar.vue').default);
 Vue.component('sidesearch', require('./components/sidesearch.vue').default);
 Vue.component('TheAuth', require('./components/auth/TheAuth.vue').default);
+Vue.component('RegForm', require('./components/auth/RegForm.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -48,7 +49,7 @@ import App from './components/App';
 window.app = new Vue({
     el: "#app",
     store: store,
-    //router: router,
+    router: router,
     components: {},
     render: h => h(App)
 });

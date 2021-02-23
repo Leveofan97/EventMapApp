@@ -25,11 +25,11 @@ const actions = {/*
     async login(context, data) {
         const res = await auth.login(data);
         context.commit("update", res);
-    },/*
+    },
     async register(context, data) {
         const res = await auth.register(data);
         context.commit("update", res);
-    },*/
+    },
 };
 
 const mutations = {
