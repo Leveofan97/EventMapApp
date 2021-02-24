@@ -18,10 +18,10 @@ class RegisterController extends Controller
         $validateFields = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'middle_name' => 'required',
             'email' => 'required|email',
             'login' => 'required',
-            'password' => 'required',
-            'phone' => 'required'
+            'password' => 'required'
         ]);
 
         $user = User::create($validateFields);
