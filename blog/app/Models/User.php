@@ -17,13 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'phone',
-        'last_name',
-        'middle_name',
+        'name',
         'email',
         'password',
-        'login'
     ];
 
     /**
@@ -35,13 +31,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    /**
-     * Add a mutator to ensure hashed passwords
-     */
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
 
     /**
      * The attributes that should be cast to native types.
