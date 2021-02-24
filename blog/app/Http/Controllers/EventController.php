@@ -10,33 +10,35 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        // Если пользователь авторезирован и уже имеется то надо с ним что-то сделать
-        //if(Auth::check()){
-        //
-        //}
+        try {
+            //добавить валидацию данных
+            $this->validate($request, [
+                'name' => 'required|max:255',
+            ]);
 
-        $validateFields = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required',
-            'coordinates' => 'required',
-            'full_description' => 'required|string|max:255',
-            'short_description' => 'required|string|max:255',
-            'max_people_count' => 'required',
-            'start_at' => 'required',
-            'finish_at' => 'required',
-            'author_id' => 'required',
-            'private' => 'required',
-            'age_from' => 'required',
-            'age_to' => 'required',
-            'price' => 'required',
-            'insta_link' => 'required|string|max:255',
-            'site_link' => 'required|string|max:255',
-            'vk_link' => 'required|string|max:255',
-            'rating' => 'required',
-            'active' => 'required'
-        ]);
-
-        $user = Event::create($validateFields);
+             $event = Event::create([
+                'name' => $request['name'],
+                'address' => $request['address'],
+                'coordinates' => $request['coordinates'],
+                'full_description' => $request['full_description'],
+                'short_description' => $request['short_description'],
+                'max_people_count' => $request['max_people_count'],
+                'start_at' => $request['start_at'],
+                'finish_at' => $request['finish_at'],
+                'author_id' => $request['author_id'],
+                'private' => $request['private'],
+                'age_from' => $request['age_from'],
+                'age_to' => $request['age_to'],
+                'price' => $request['price'],
+                'insta_link' => $request['insta_link'],
+                'site_link' => $request['site_link'],
+                'vk_link' => $request['vk_link'],
+                'rating' => $request['rating'],
+                'active' => $request['active'],
+            ]);
+        } catch (\Exception $e) {
+            abort(401, 'Не удалось добавить данные');
+        }
     }
 
 
