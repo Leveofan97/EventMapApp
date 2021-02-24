@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group([
     'prefix' => 'user',
 ], function () {
     Route::post('login', [AuthController::class, 'login']);
-
+    Route::post('registration',[RegisterController::class, 'save']);
+    Route::post('newevent',[EventController::class, 'store']);
     Route::group([
         'middleware' => ['auth:web'],
     ], function () {

@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.views.index');
 });
-Route::get('/createevent', 'EventController@store');
-Route::get('/showevent', 'EventController@index');
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
