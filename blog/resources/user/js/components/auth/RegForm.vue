@@ -11,13 +11,13 @@
 
                     <div class="input-container">
                         <div class="column">
-                            <input placeholder="Имя" type="text" id="name" autofocus v-model="d_auth.name"/>
-                            <input placeholder="Фамилия" type="text" id="surname" autofocus v-model="d_auth.surname"/>
-                            <input placeholder="Отчество" type="text" id="patronymic" autofocus v-model="d_auth.patronymic"/>
+                            <input placeholder="Имя" type="text" id="first_name" autofocus v-model="d_auth.first_name"/>
+                            <input placeholder="Фамилия" type="text" id="last_name" autofocus v-model="d_auth.last_name"/>
+                            <input placeholder="Отчество" type="text" id="middle_name" autofocus v-model="d_auth.middle_name"/>
                         </div>
                         <div class="column">
                             <input placeholder="E-mail" type="email" id="email" autofocus v-model="d_auth.email"/>
-                            <input placeholder="Логин" type="text" id="login" autofocus v-model="d_auth.username"/>
+                            <input placeholder="Логин" type="text" id="login" autofocus v-model="d_auth.login"/>
                             <input placeholder="Пароль" type="password" id="password" autofocus v-model="d_auth.password"/>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
         data() {
             return {
                 d_auth: {
-                    name: null,
-                    surname: null,
-                    patronymic: null,
+                    first_name: null,
+                    last_name: null,
+                    middle_name: null,
                     email: null,
-                    username: null,
+                    login: null,
                     password: null,
                 },
                 d_loading: false,
