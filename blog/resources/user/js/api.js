@@ -110,7 +110,7 @@ export const auth = {
         return (await http.post(`login`, params)).data;
     },
     async register(params) {
-        return (await http.post(`register`, params)).data;
+        return (await http.post(`registration`, params)).data;
     },
     async update(params) {
         return (await http.put(`profile`, params)).data;

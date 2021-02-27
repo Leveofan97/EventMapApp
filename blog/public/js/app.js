@@ -2398,6 +2398,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var mdbvue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mdbvue */ "./node_modules/mdbvue/lib/index.js");
+/* harmony import */ var mdbvue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(mdbvue__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2417,6 +2434,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "mapContent",
   components: {
@@ -2424,7 +2442,13 @@ __webpack_require__.r(__webpack_exports__);
     LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LTileLayer"],
     LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LMarker"],
     LPopup: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LPopup"],
-    LControlZoom: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LControlZoom"]
+    LControlZoom: vue2_leaflet__WEBPACK_IMPORTED_MODULE_0__["LControlZoom"],
+    mdbCard: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbCard"],
+    mdbCardImage: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbCardImage"],
+    mdbCardBody: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbCardBody"],
+    mdbCardTitle: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbCardTitle"],
+    mdbCardText: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbCardText"],
+    mdbBtn: mdbvue__WEBPACK_IMPORTED_MODULE_1__["mdbBtn"]
   },
   data: function data() {
     return {
@@ -2787,7 +2811,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".auth-form-wrap[data-v-7d799781] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  -webkit-backdrop-filter: blur(4px);\n          backdrop-filter: blur(4px);\n}\n.bg-blockf[data-v-7d799781] {\n  width: 100%;\n  height: 100%;\n  background: #9CA376;\n  border-radius: 5px;\n  transform: rotate(2.85deg);\n  z-index: 2;\n}\n.bg-blocks[data-v-7d799781] {\n  width: 40%;\n  background: #343A48;\n  border-radius: 5px;\n  transform: rotate(-7.53deg);\n  z-index: 1;\n}\n.auth-form[data-v-7d799781] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  max-width: 100%;\n  background: #ffffff;\n  padding: 2em 15px;\n  border-radius: 5px;\n  z-index: 3;\n  transform: rotate(4.68deg);\n}\n.auth-form .auth-title[data-v-7d799781] {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n.auth-form .auth-title hr[data-v-7d799781] {\n  width: 70%;\n  border-top: 1.5px solid black;\n  margin-left: 2em;\n  margin-right: 2em;\n}\n.auth-form input[data-v-7d799781] {\n  background: #DDDDDD;\n  border-radius: 5px;\n  border: 0px;\n  margin: 0.5em;\n  width: 30%;\n  height: 2.5em;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));\n  padding-left: 1em;\n  transition: 0.2s filter;\n}\n.auth-form input[data-v-7d799781]::-moz-placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]:-ms-input-placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]::placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]:focus {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  outline: none;\n}\n.auth-form input[data-v-7d799781]:hover {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  outline: none;\n}\n.auth-form button[data-v-7d799781] {\n  background: #DDDDDD;\n  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);\n  border: 0px;\n  border-radius: 5px;\n  width: 17em;\n  height: 2.5em;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1.1em;\n  line-height: 24px;\n  color: #706E6E;\n  transition: 0.2s box-shadow;\n}\n.auth-form button[data-v-7d799781]:hover {\n  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);\n}\n.auth-form a[data-v-7d799781] {\n  color: #9A9A9A;\n  text-decoration: none;\n}", ""]);
+exports.push([module.i, ".auth-form-wrap[data-v-7d799781] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  -webkit-backdrop-filter: blur(4px);\n          backdrop-filter: blur(4px);\n  transition: 0.2s -webkit-backdrop-filter;\n  transition: 0.2s backdrop-filter;\n  transition: 0.2s backdrop-filter, 0.2s -webkit-backdrop-filter;\n}\n.bg-blockf[data-v-7d799781] {\n  width: 100%;\n  height: 100%;\n  background: #9CA376;\n  border-radius: 5px;\n  transform: rotate(2.85deg);\n  z-index: 2;\n}\n.bg-blocks[data-v-7d799781] {\n  width: 40%;\n  background: #343A48;\n  border-radius: 5px;\n  transform: rotate(-7.53deg);\n  z-index: 1;\n}\n.auth-form[data-v-7d799781] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n  max-width: 100%;\n  background: #ffffff;\n  padding: 2em 15px;\n  border-radius: 5px;\n  z-index: 3;\n  transform: rotate(4.68deg);\n}\n.auth-form .auth-title[data-v-7d799781] {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n.auth-form .auth-title hr[data-v-7d799781] {\n  width: 70%;\n  border-top: 1.5px solid black;\n  margin-left: 2em;\n  margin-right: 2em;\n}\n.auth-form input[data-v-7d799781] {\n  background: #DDDDDD;\n  border-radius: 5px;\n  border: 0px;\n  margin: 0.5em;\n  width: 30%;\n  height: 2.5em;\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));\n  padding-left: 1em;\n  transition: 0.2s filter;\n}\n.auth-form input[data-v-7d799781]::-moz-placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]:-ms-input-placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]::placeholder {\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1em;\n  color: #9A9A9A;\n}\n.auth-form input[data-v-7d799781]:focus {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  outline: none;\n}\n.auth-form input[data-v-7d799781]:hover {\n  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));\n  outline: none;\n}\n.auth-form button[data-v-7d799781] {\n  background: #DDDDDD;\n  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);\n  border: 0px;\n  border-radius: 5px;\n  width: 17em;\n  height: 2.5em;\n  font-style: normal;\n  font-weight: normal;\n  font-size: 1.1em;\n  line-height: 24px;\n  color: #706E6E;\n  transition: 0.2s box-shadow;\n}\n.auth-form button[data-v-7d799781]:hover {\n  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.28);\n}\n.auth-form a[data-v-7d799781] {\n  color: #9A9A9A;\n  text-decoration: none;\n}", ""]);
 
 // exports
 
@@ -21107,7 +21131,45 @@ var render = function() {
           _c(
             "l-marker",
             { attrs: { "lat-lng": _vm.markerLatLng } },
-            [_c("l-popup", [_vm._v("Тут что-то происходит")])],
+            [
+              _c(
+                "l-popup",
+                [
+                  _c(
+                    "mdb-card",
+                    [
+                      _c("mdb-card-image", {
+                        attrs: {
+                          src:
+                            "https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%286%29.jpg",
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "mdb-card-body",
+                        [
+                          _c("mdb-card-title", [_vm._v("Basic card")]),
+                          _vm._v(" "),
+                          _c("mdb-card-text", [
+                            _vm._v(
+                              "Some quick example text to build on the card title and make up the bulk of the card's content."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("mdb-btn", { attrs: { color: "primary" } }, [
+                            _vm._v("Button")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
             1
           ),
           _vm._v(" "),

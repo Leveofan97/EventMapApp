@@ -102,6 +102,7 @@
         width: 100%;
         height: 100%;
         backdrop-filter: blur(4px);
+        transition: .2s backdrop-filter;
     }
     .bg-blockf {
         width: 100%;
