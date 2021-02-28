@@ -15,6 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string("name");
             $table->string("address");
             $table->json("coordinates");
@@ -33,7 +34,7 @@ class CreateEventsTable extends Migration
             $table->string("vk_link")->nullable();
             $table->float("rating")->default(0);
             $table->boolean("active");
-            
+
         });
     }
 

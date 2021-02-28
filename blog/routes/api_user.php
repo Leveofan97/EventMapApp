@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RegisterEvent;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::group([
 ], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('registration',[RegisterController::class, 'save']);
+    Route::post('newevent',[RegisterEvent::class, 'save']);
 
     Route::group([
         'middleware' => ['auth:web'],
