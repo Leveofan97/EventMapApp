@@ -46,6 +46,6 @@ class EventController extends Controller
      // Контроллер вывода всех событий
      public function index()
      {
-        $events = Event::all();
+         return Event::all();
     }
 }
