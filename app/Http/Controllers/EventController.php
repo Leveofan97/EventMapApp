@@ -42,17 +42,10 @@ class EventController extends Controller
     }
 
 
-    /*
+
      // Контроллер вывода всех событий
      public function index()
      {
-        // Можно добавить вызов представления куда будет класть данные
         $events = Event::all();
-
-        foreach ($events as $event) {
-            echo $event->name;
-        }
     }
-
-    */
 }
