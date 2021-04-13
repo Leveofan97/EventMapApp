@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -43,9 +45,17 @@ class EventController extends Controller
 
 
 
-     // Контроллер вывода всех событий
+     // Метод вывода всех событий
      public function index()
      {
-         return Event::all();
-    }
+         if (Auth::check()) {
+            return Event::all();
+
+         }
+         else{
+         return DB::table('events')
+             ->where('private', '=', 0)
+             ->get();
+         }
+     }
 }
