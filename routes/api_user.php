@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RegisterEvent;
 use App\Http\Controllers\User\AuthController;
@@ -17,13 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([
-    'prefix' => 'user',
-], function () {
+Route::group(['prefix' => 'user'], function () {
+    //Route::post('logintest', [LoginController::class, 'login']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('registration',[RegisterController::class, 'create']);
-    Route::post('newevent',[RegisterEvent::class, 'save']);
+    Route::post('newevent',[EventController::class, 'save']);
     Route::get('listevents',[EventController::class, 'index']);
 
     Route::group([

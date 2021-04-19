@@ -76,4 +76,8 @@ class RegisterController extends Controller
             'password' => $data['password'],
         ]);
     }
+    protected function registered(Request $data)
+    {
+        $this->guard()->logout();
+    }
 }

@@ -49,6 +49,19 @@ class DatabaseSeeder extends Seeder
         );
         Event::create(
             [
+                "name" => "Event1",
+                "address" => "Addres Event",
+                "coordinates" => "[23.4582348,37.5062675]",
+                "short_description" => "Short about event",
+                "start_at" => "2021-04-23T18:25:43",
+                "finish_at" => "2021-04-30T18:25:43",
+                "author_id" => "1",
+                "price" => "100",
+                "active" => "0"
+            ]
+        );
+        Event::create(
+            [
                 "name" => "Event2",
                 "address" => "Addres Event",
                 "coordinates" => "[23.4582348,37.5062675]",
