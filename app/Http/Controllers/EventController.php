@@ -9,14 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
-
+    // Метод сохранения событий в базу
     public function save (Request $request){
-
-        // Если пользователь авторезирован и уже имеется то надо с ним что-то сделать
-        //if(Auth::check()){
-        //
-        //}
-
         $validateFields = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'max:255'],
@@ -31,14 +25,11 @@ class EventController extends Controller
         $user = Event::create($validateFields);
     }
 
-
-
      // Метод вывода всех событий
      public function index()
      {
          if (Auth::check()) {
             return Event::all();
-
          }
          else{
          return DB::table('events')
@@ -46,4 +37,14 @@ class EventController extends Controller
              ->get();
          }
      }
+
+    // Метод вывода всех событий в которых текущий пользователь авто
+     public function eventorganize(){
+        if (Auth::check()) {
+            $user = Auth::user()->getAuthIdentifier();
+            return DB::table('events')
+                ->where('author_id','=',$user)
+                ->get();
+        }
+    }
 }
