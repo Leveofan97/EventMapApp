@@ -30,20 +30,22 @@ class EventController extends Controller
     }
 
     protected function save(Request $data){
-        return Event::create([
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'coordinates' => $data['coordinates'],
-            'short_description' => $data['short_description'],
-            'full_description' => $data['short_description'],
-            'start_at' => $data['start_at'],
-            'finish_at' => $data['finish_at'],
-            'author_id' => $data['author_id'],
-            'private' => $data['private'],
-            'price' => $data['price'],
-            'age_from'=>$data['age_from'],
-            'age_to'=>$data['age_to'],
+        if(Auth::check()){
+            return Event::create([
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'coordinates' => $data['coordinates'],
+                'short_description' => $data['short_description'],
+                'full_description' => $data['short_description'],
+                'start_at' => $data['start_at'],
+                'finish_at' => $data['finish_at'],
+                'author_id' => $data['author_id'],
+                'private' => $data['private'],
+                'price' => $data['price'],
+                'age_from'=>$data['age_from'],
+                'age_to'=>$data['age_to'],
             ]);
+        }
     }
      // Метод вывода всех событий
      public function index()
