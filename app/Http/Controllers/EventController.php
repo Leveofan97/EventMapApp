@@ -31,8 +31,7 @@ class EventController extends Controller
     }
 
     protected function save(Request $data){
-    if(Auth::check()){
-        return Event::create([
+            return Event::create([
             'name' => $data['name'],
             'address' => $data['address'],
             'coordinates' => $data['coordinates'],
@@ -48,7 +47,6 @@ class EventController extends Controller
             'age_from'=>$data['age_from'],
             'age_to'=>$data['age_to'],
         ]);
-    }
     }
      // Метод вывода всех событий
      public function index()
