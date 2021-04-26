@@ -21,6 +21,7 @@ class EventController extends Controller
                 'start_at'=>'required',
                 'author_id' => 'required',
                 'private'=> 'required',
+                'max_people_count'=>'required',
             ]);
         }
 
@@ -30,22 +31,24 @@ class EventController extends Controller
     }
 
     protected function save(Request $data){
-        if(Auth::check()){
+
             return Event::create([
                 'name' => $data['name'],
                 'address' => $data['address'],
                 'coordinates' => $data['coordinates'],
                 'short_description' => $data['short_description'],
-                'full_description' => $data['short_description'],
+                'full_description' => $data['full_description'],
                 'start_at' => $data['start_at'],
+                'max_people_count' => $data['max_people_count'],
                 'finish_at' => $data['finish_at'],
                 'author_id' => $data['author_id'],
                 'private' => $data['private'],
+                'active' => 0,
                 'price' => $data['price'],
                 'age_from'=>$data['age_from'],
                 'age_to'=>$data['age_to'],
             ]);
-        }
+
     }
      // Метод вывода всех событий
      public function index()
