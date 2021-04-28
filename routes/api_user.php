@@ -23,12 +23,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('registration',[RegisterController::class, 'create']);
     Route::get('listevents',[EventController::class, 'index']);
-    Route::post('newevent',[EventController::class, 'save']);
+
     Route::get('getcategories',[EventController::class, 'getCategory']);
 
     Route::group([
-        'middleware' => ['auth:web'],
+        'middleware' => ['auth:sanctum'],
     ], function () {
-        //
+        Route::post('newevent',[EventController::class, 'save']);
     });
 });
