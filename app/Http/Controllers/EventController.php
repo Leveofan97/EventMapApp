@@ -22,6 +22,7 @@ class EventController extends Controller
                 'author_id' => 'required',
                 'private'=> 'required',
                 'max_people_count'=>'required',
+                'category_id'=>'required',
             ]);
         }
 
@@ -31,21 +32,25 @@ class EventController extends Controller
     }
 
     protected function save(Request $data){
-            return Event::create([
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'coordinates' => $data['coordinates'],
-            'short_description' => $data['short_description'],
-            'full_description' => $data['full_description'],
-            'start_at' => $data['start_at'],
-            'max_people_count' => $data['max_people_count'],
-            'finish_at' => $data['finish_at'],
-            'author_id' => $data['author_id'],
-            'private' => $data['private'],
-            'active' => 0,
-            'price' => $data['price'],
-            'age_from'=>$data['age_from'],
-            'age_to'=>$data['age_to'],
+        $id = DB::table('events')->insertGetId([
+        'name' => $data['name'],
+        'address' => $data['address'],
+        'coordinates' => $data['coordinates'],
+        'short_description' => $data['short_description'],
+        'full_description' => $data['full_description'],
+        'start_at' => $data['start_at'],
+        'max_people_count' => $data['max_people_count'],
+        'finish_at' => $data['finish_at'],
+        'author_id' => $data['author_id'],
+        'private' => $data['private'],
+        'active' => 0,
+        'price' => $data['price'],
+        'age_from'=>$data['age_from'],
+        'age_to'=>$data['age_to'],
+        ]);
+        DB::table('event_category')->insert([
+            'event_id'=>$id,
+            'category_id'=>$data['category_id']
         ]);
     }
      // Метод вывода всех событий

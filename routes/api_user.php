@@ -23,7 +23,6 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('registration',[RegisterController::class, 'create']);
     Route::get('listevents',[EventController::class, 'index']);
-
     Route::get('getcategories',[EventController::class, 'getCategory']);
 
     Route::group([

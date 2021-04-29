@@ -18,8 +18,8 @@ return [
     'paths' => ['*'],
 
     'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['*'],
+    //прописать домены которым доступны маршруты
+    'allowed_origins' => ['http://127.0.0.1:3000'],
 
     'allowed_origins_patterns' => [],
 
