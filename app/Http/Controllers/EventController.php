@@ -57,12 +57,56 @@ class EventController extends Controller
      public function index()
      {
          if (Auth::check()) {
-            return Event::all();
+             return DB::table('events')
+                 ->select(
+                     'events.name',
+                     'events.address',
+                     'events.coordinates',
+                     'events.full_description',
+                     'events.short_description',
+                     'events.max_people_count',
+                     'events.start_at',
+                     'events.finish_at',
+                     'events.author_id',
+                     'events.private',
+                     'events.age_from',
+                     'events.age_to',
+                     'events.price',
+                     'events.insta_link',
+                     'events.site_link',
+                     'events.vk_link',
+                     'events.rating',
+                     'categories.title')
+                 ->where('active','=',1)
+                 ->join('event_category', 'events.id', '=', 'event_category.event_id')
+                 ->join('categories', 'event_category.category_id', '=', 'categories.id')
+                 ->get();
          }
          else{
-         return DB::table('events')
-             ->where('private', '=', 0)
-             ->get();
+             return DB::table('events')
+                 ->select(
+                     'events.name',
+                     'events.address',
+                     'events.coordinates',
+                     'events.full_description',
+                     'events.short_description',
+                     'events.max_people_count',
+                     'events.start_at',
+                     'events.finish_at',
+                     'events.author_id',
+                     'events.age_from',
+                     'events.age_to',
+                     'events.price',
+                     'events.insta_link',
+                     'events.private',
+                     'events.site_link',
+                     'events.vk_link',
+                     'events.rating',
+                     'categories.title')
+                 ->where('private','=',0)
+                 ->join('event_category', 'events.id', '=', 'event_category.event_id')
+                 ->join('categories', 'event_category.category_id', '=', 'categories.id')
+                 ->get();
          }
      }
 

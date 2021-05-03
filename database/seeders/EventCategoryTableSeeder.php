@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategoriesTableSeeder extends Seeder
+class EventCategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,12 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $data = [];
-        for($i = 1; $i<=5; $i++){
+        for($i = 1; $i<=200; $i++){
             $data [] = [
-                'title'=>'Категория'.$i,
-                'color'=>'Цвет'.$i,
-                ];
+                'category_id'=>rand(1,5),
+                'event_id'=>rand(1,200),
+            ];
         }
-        DB::table('categories')->insert($data);
+        DB::table('event_category')->insert($data);
     }
 }
