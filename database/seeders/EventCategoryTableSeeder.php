@@ -18,7 +18,7 @@ class EventCategoryTableSeeder extends Seeder
         for($i = 1; $i<=200; $i++){
             $data [] = [
                 'category_id'=>rand(1,5),
-                'event_id'=>rand(1,200),
+                'event_id'=>$i,
             ];
         }
         DB::table('event_category')->insert($data);
