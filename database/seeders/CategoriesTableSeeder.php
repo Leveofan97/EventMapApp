@@ -17,7 +17,7 @@ class CategoriesTableSeeder extends Seeder
         $data = [];
         for($i = 1; $i<=5; $i++){
             $data [] = [
-                'title'=>'Категория'.$i,
+                'title_category'=>'Категория'.$i,
                 'color'=>'Цвет'.$i,
                 ];
         }

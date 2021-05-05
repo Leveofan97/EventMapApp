@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\RegisterEvent;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
