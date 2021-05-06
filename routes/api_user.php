@@ -23,7 +23,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('registration',[RegisterController::class, 'create']);
     Route::get('listevents',[EventController::class, 'index']);
     Route::get('getcategories',[EventController::class, 'getCategory']);
-
+    Route::get('getmarks', [EventController::class,'getMarkers']);
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {

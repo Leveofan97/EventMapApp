@@ -109,6 +109,27 @@ class EventController extends Controller
                  ->get();
          }
      }
+    //Дописать проверку на авторезированность
+    //Дописать добавление названия, id, Короткого описания, id_категории
+     public function getMarkers(){
+         $test =  DB::table('events')->get();
+         $original_data = json_decode($test, true);
+         $features = array();
+
+         foreach($original_data as $key => $value) {
+             $features[] = array(
+                 'type' => 'Feature',
+                 'properties'=>array(
+                     'id'=>$value['id'],
+                     'name'=>$value['name'],
+                     'short_description'=>$value['short_description']),
+                 'geometry' => array('type' => 'Point', 'coordinates' => json_decode($value['coordinates'])),
+             );
+             //var_dump($value['name']);
+         };
+         $allfeatures = array('type' => 'FeatureCollection', 'features' => $features);
+         return json_encode($allfeatures, JSON_PRETTY_PRINT);
+     }
 
     // Метод вывода всех событий в которых текущий пользователь автор
      public function eventorganize(){
