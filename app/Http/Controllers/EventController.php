@@ -112,8 +112,12 @@ class EventController extends Controller
     //Дописать проверку на авторезированность
     //Дописать добавление названия, id, Короткого описания, id_категории
      public function getMarkers(){
-         $test =  DB::table('events')->get();
+         $test =  DB::table('events')
+             ->join('event_category', 'events.id', '=', 'event_category.event_id')
+             ->join('categories', 'event_category.category_id', '=', 'categories.id')
+             ->get();
          $original_data = json_decode($test, true);
+         //var_dump($original_data);
          $features = array();
 
          foreach($original_data as $key => $value) {
@@ -121,14 +125,18 @@ class EventController extends Controller
                  'type' => 'Feature',
                  'properties'=>array(
                      'id'=>$value['id'],
+                     'category_id '=>$value['category_id'],
                      'name'=>$value['name'],
-                     'short_description'=>$value['short_description']),
-                 'geometry' => array('type' => 'Point', 'coordinates' => json_decode($value['coordinates'])),
+                     'short_description'=>$value['short_description']
+                 ),
+                 'geometry' => array(
+                     'type' => 'Point',
+                     'coordinates' => json_decode($value['coordinates'])
+                 ),
              );
-             //var_dump($value['name']);
          };
          $allfeatures = array('type' => 'FeatureCollection', 'features' => $features);
-         return json_encode($allfeatures, JSON_PRETTY_PRINT);
+         return json_encode($allfeatures, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
      }
 
     // Метод вывода всех событий в которых текущий пользователь автор
