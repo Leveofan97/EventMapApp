@@ -19,8 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
     //прописать домены которым доступны маршруты
-    'allowed_origins' => ['http://eventsmapapp.herokuapp.com/'],
-    //http://127.0.0.1:3000
+    'allowed_origins' => ['http://127.0.0.1:3000'],
+
     'allowed_origins_patterns' => [],
 
     'allowed_headers' => ['*'],

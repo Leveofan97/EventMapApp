@@ -47,7 +47,7 @@ class EventController extends Controller
                 'finish_at' => $data['finish_at'],
                 'author_id' => $data['author_id'],
                 'private' => $data['private'],
-                'active' => 1,
+                'active' => 0,
                 'price' => $data['price'],
                 'age_from'=>$data['age_from'],
                 'age_to'=>$data['age_to'],
