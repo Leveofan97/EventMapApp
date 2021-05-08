@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'https://eventmapappserver.herokuapp.com/api/user/registration',
         'https://eventmapappserver.herokuapp.com/api/user/listevent',
+        'https://eventmapappserver.herokuapp.com/api/user/getmarks',
     ];
 }
