@@ -12,7 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://localhost:8000/api/user/registration',
-        'http://localhost:8000/api/user/listevent',
+        'https://eventmapappserver.herokuapp.com/api/user/registration',
+        'https://eventmapappserver.herokuapp.com/api/user/listevent',
+        'https://eventmapappserver.herokuapp.com/api/user/getmarks',
     ];
 }
