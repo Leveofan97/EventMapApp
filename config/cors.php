@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
     //прописать домены которым доступны маршруты
-    'allowed_origins' => ['http://eventsmapapp.herokuapp.com/'],
+    'allowed_origins' => ['http://eventsmapapp.herokuapp.com'],
 
     'allowed_origins_patterns' => [],
 
