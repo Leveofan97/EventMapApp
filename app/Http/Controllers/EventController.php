@@ -47,7 +47,7 @@ class EventController extends Controller
                 'finish_at' => $data['finish_at'],
                 'author_id' => $data['author_id'],
                 'private' => $data['private'],
-                'active' => 0,
+                'active' => 1,
                 'price' => $data['price'],
                 'age_from'=>$data['age_from'],
                 'age_to'=>$data['age_to'],
@@ -109,12 +109,10 @@ class EventController extends Controller
                  ->get();
          }
      }
-    //Дописать проверку на авторезированность
-    //Дописать добавление названия, id, Короткого описания, id_категории
      public function getMarkers(){
          $test =  DB::table('events')
-             ->join('event_category', 'events.id', '=', 'event_category.event_id')
-             ->join('categories', 'event_category.category_id', '=', 'categories.id')
+             //->join('event_category', 'events.id', '=', 'event_category.event_id')
+             //->join('categories', 'event_category.category_id', '=', 'categories.id')
              ->get();
          $original_data = json_decode($test, true);
          //var_dump($original_data);
@@ -125,7 +123,7 @@ class EventController extends Controller
                  'type' => 'Feature',
                  'properties'=>array(
                      'id'=>$value['id'],
-                     'category_id '=>$value['category_id'],
+                     //'category_id '=>$value['category_id'],
                      'name'=>$value['name'],
                      'short_description'=>$value['short_description']
                  ),
