@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['prefix' => 'user'], function () {
+Route::group(array('before' => 'nohttps'), function()
+{
+    Route::group(['prefix' => 'user'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('registration',[RegisterController::class, 'create']);
@@ -30,3 +31,5 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('newevent',[EventController::class, 'save']);
     });
 });
+
+
