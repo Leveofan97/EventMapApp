@@ -12,7 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://eventsmap.ru/sanctum/csrf-cookie',
         'http://eventsmap.ru/api/user/registration',
         'http://eventsmap.ru/api/user/listevent',
         'http://eventsmap.ru/api/user/getmarks',
