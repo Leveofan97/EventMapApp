@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => '*eventsmap.ru',//env('SESSION_DOMAIN', null),
+    'domain' => '.eventsmap.ru',//env('SESSION_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
