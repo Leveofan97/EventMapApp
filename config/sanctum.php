@@ -15,7 +15,7 @@ return [
 
     'stateful' => explode(',', env(
         'SANCTUM_STATEFUL_DOMAINS',
-        '*.herokuapp.com, http://eventsmapapp.herokuapp.com,https://eventmapappserver.herokuapp.com,::1,'.parse_url(env('APP_URL'), PHP_URL_HOST)
+        '*.herokuapp.com, http://eventsmapapp.herokuapp.com,https://eventmapappserver.herokuapp.com,*.eventsmap.ru,::1,'.parse_url(env('APP_URL'), PHP_URL_HOST)
     )),
 
     /*
