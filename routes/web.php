@@ -15,7 +15,10 @@ use App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/{any}', [IndexController::class, 'index'])
+Route::get('/{any}', function () {
+    return view('user.views.index');
+})
     ->where('any', '.*');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
