@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
     //прописать домены которым доступны маршруты
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['eventsmap.ru,api.eventsmap.ru'],
 
     'allowed_origins_patterns' => [],
 
