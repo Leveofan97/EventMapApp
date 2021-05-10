@@ -15,9 +15,10 @@ use App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/{any}', function () {
+Route::get('/', function () {
     return view('user.views.index');
-})
+});
+Route::get('/{any}', [IndexController::class, 'index'])
     ->where('any', '.*');
 
 
