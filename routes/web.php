@@ -14,7 +14,10 @@ use App\Http\Controllers\IndexController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/{any}', [IndexController::class, 'index'])->where('any', '.*');
-
+Route::get('/', function () {
+    return view('user.views.index');
+});
+Route::get('/{any}', [IndexController::class, 'index'])
+    ->where('any', '.*');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
