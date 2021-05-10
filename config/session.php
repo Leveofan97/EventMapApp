@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => 'file',//env('SESSION_DRIVER', 'file'),
+    'driver' => 'cookie',//env('SESSION_DRIVER', 'file'),
 
     /*
     |--------------------------------------------------------------------------
