@@ -14,10 +14,6 @@ use App\Http\Controllers\IndexController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('test/1', function () {
-    return view('user.views.index');
-});
 Route::get('/{any}', [IndexController::class, 'index'])
     ->where('any', '.*');
 
