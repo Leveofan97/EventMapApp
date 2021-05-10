@@ -15,7 +15,7 @@ use App\Http\Controllers\IndexController;
 |
 */
 
-Route::get('/', function () {
+Route::get('test/1', function () {
     return view('user.views.index');
 });
 Route::get('/{any}', [IndexController::class, 'index'])
