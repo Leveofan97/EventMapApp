@@ -20,7 +20,7 @@ class IndexController extends Controller
 
         $data = $data->camelCaseKeys();
     */
-        return 1//Auth::guard('web')->user();
+        return Auth::guard('web')->user();
     }
 
     /*
