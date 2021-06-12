@@ -26,6 +26,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('getmarks', [EventController::class,'getMarkers']);
     Route::get('moderate', [EventController::class,'geteventsformoderate']);
     Route::get('member', [EventController::class,'getmymemberevents']);
+    Route::get('userauthor', [EventController::class,'eventorganize']);
     Route::get('membercheck', [EventController::class,'eventmember']);
     Route::group([
         'middleware' => ['auth:sanctum'],
