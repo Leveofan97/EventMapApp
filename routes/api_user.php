@@ -24,6 +24,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('listevents',[EventController::class, 'index']);
     Route::get('getcategories',[EventController::class, 'getCategory']);
     Route::get('getmarks', [EventController::class,'getMarkers']);
+    Route::get('moderate', [EventController::class,'geteventsformoderate']);
+    Route::get('member', [EventController::class,'getmymemberevents']);
+    Route::get('membercheck', [EventController::class,'eventmember']);
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {

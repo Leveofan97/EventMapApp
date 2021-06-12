@@ -146,4 +146,61 @@ class EventController extends Controller
                 ->get();
         }
     }
+
+    // Метод вывода всех неактивных событий
+    public function geteventsformoderate(){
+        //if (Auth::check()) {
+            return DB::table('events')
+                ->where('active','=',0)
+                ->get();
+        //}
+    }
+    // Метод записи на мероприятие
+    public function eventmember(Request $data){
+        if($data['event_id'] == null){
+            abort(400,'Пустое поле id мероприятия');
+        }
+        if($data['user_id'] == null){
+            abort(400,'Пустое поле id пользователя');
+        }
+        else{
+            DB::table('event_member')->insert([
+                'event_id' => $data['event_id'],
+                'user_id' => $data['user_id'],
+            ]);
+            abort(200,'Информация добавлена');
+        }
+    }
+    //Метод вывода всех мероприятий на которые записан пользоватетель
+    public function getmymemberevents(Request $data){
+        if($data['user_id'] == null){
+            abort(400,'Пустое поле id пользователя');
+        }
+        else {
+            $prm = $data['user_id'];
+            return DB::table('event_member')
+                ->where('user_id',$prm)
+                ->join('events', 'event_member.event_id', '=', 'events.id')
+                ->select(
+                    'events.id',
+                    'events.name',
+                    'events.address',
+                    'events.coordinates',
+                    'events.full_description',
+                    'events.short_description',
+                    'events.max_people_count',
+                    'events.start_at',
+                    'events.finish_at',
+                    'events.author_id',
+                    'events.private',
+                    'events.age_from',
+                    'events.age_to',
+                    'events.price',
+                    'events.insta_link',
+                    'events.site_link',
+                    'events.vk_link',
+                    'events.rating')
+                ->get();
+        }
+    }
 }
