@@ -30,6 +30,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('moderate', [EventController::class,'geteventsformoderate']);
         Route::get('member', [EventController::class,'getmymemberevents']);
         Route::get('membercheck', [EventController::class,'eventmember']);
+        Route::get('userauthor', [EventController::class,'eventorganize']);
     });
 });
 
