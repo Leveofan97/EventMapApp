@@ -27,6 +27,9 @@ Route::group(['prefix' => 'user'], function () {
         'middleware' => ['auth:sanctum'],
     ], function () {
         Route::post('newevent',[EventController::class, 'save']);
+        Route::get('moderate', [EventController::class,'geteventsformoderate']);
+        Route::get('member', [EventController::class,'getmymemberevents']);
+        Route::get('membercheck', [EventController::class,'eventmember']);
     });
 });
 
