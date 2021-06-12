@@ -138,9 +138,12 @@ class EventController extends Controller
      }
 
     // Метод вывода всех событий в которых текущий пользователь автор
-     public function eventorganize(){
-        if (Auth::check()) {
-            $user = Auth::user()->getAuthIdentifier();
+    public function eventorganize(Request $data){
+        if($data['user_id'] == null){
+            abort(400,'Пустое поле id пользователя');
+        }
+        else {
+            $user = $data['user_id'];
             return DB::table('events')
                 ->where('author_id','=',$user)
                 ->get();
