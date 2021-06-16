@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group(['prefix' => 'user'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
@@ -24,13 +23,16 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('listevents',[EventController::class, 'index']);
     Route::get('getcategories',[EventController::class, 'getCategory']);
     Route::get('getmarks', [EventController::class,'getMarkers']);
-    Route::get('moderate', [EventController::class,'geteventsformoderate']);
-    Route::get('member', [EventController::class,'getmymemberevents']);
-    Route::get('userauthor', [EventController::class,'eventorganize']);
-    Route::get('membercheck', [EventController::class,'eventmember']);
     Route::group([
         'middleware' => ['auth:sanctum'],
     ], function () {
         Route::post('newevent',[EventController::class, 'save']);
+        Route::get('moderate', [EventController::class,'geteventsformoderate']);
+        Route::get('member', [EventController::class,'getmymemberevents']);
+        Route::get('membercheck', [EventController::class,'eventmember']);
+        Route::get('userauthor', [EventController::class,'eventorganize']);
     });
 });
+
+
+
