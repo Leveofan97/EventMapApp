@@ -174,6 +174,21 @@ class EventController extends Controller
             abort(200,'Информация добавлена');
         }
     }
+    public function removemember(Request $data){
+        if($data['event_id'] == null){
+            abort(400,'Пустое поле id мероприятия');
+        }
+        if($data['user_id'] == null){
+            abort(400,'Пустое поле id пользователя');
+        }
+        else{
+            DB::table('event_member')
+                ->where('event_id','=',$data['event_id'])
+                ->where('user_id','=',$data['user_id'])
+                ->delete();
+            abort(200,'Информация удалена');
+        }
+    }
     //Метод вывода всех мероприятий на которые записан пользоватетель
     public function getmymemberevents(Request $data){
         if($data['user_id'] == null){
