@@ -30,7 +30,7 @@ class EventController extends Controller
        return DB::table('categories')
            ->get();
     }
-
+    // Метод сохранения мероприятий
     protected function save(Request $data){
         if($data['category_id'] == null){
             abort(400,'Пустое поле категории');
@@ -59,6 +59,7 @@ class EventController extends Controller
             ]);
         }
     }
+
      // Метод вывода всех событий
      public function index(Request $data)
      {
@@ -220,5 +221,15 @@ class EventController extends Controller
                     'events.rating')
                 ->get();
         }
+    }
+    //Доделать а то хрень пока что!
+    public function search(Request $data){
+        //if($data['user_id'] == null){
+        //    abort(400,'Пустое поле id пользователя');
+        //}
+        $search = $data['name'];
+        return DB::table('events')
+            ->where('name','=',$search)
+            ->get();
     }
 }
