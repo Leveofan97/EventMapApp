@@ -229,7 +229,7 @@ class EventController extends Controller
         //}
         $search = $data['name'];
         return DB::table('events')
-            ->where('name','=',$search)
+            ->where('name','LIKE', '%' . $search . '%')
             ->get();
     }
 }
