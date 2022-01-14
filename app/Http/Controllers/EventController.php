@@ -172,6 +172,19 @@ class EventController extends Controller
         }
     }
 
+    // Метод активации мероприятия (для модератора)
+    public function activateEvent(Request $data){
+        if($data['event_id'] == null){
+            abort(400,'Пустое поле id мероприятия');
+        }
+        else{
+            DB::table('event')
+                ->where('id', '=', $data['event_id'])
+                ->update(['active' => 1]);
+            abort(200,'Мероприятие опубликовано');
+        }
+    }
+
     // Метод записи на мероприятие
     public function eventmember(Request $data){
         if($data['event_id'] == null){
