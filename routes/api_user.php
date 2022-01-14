@@ -27,6 +27,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('newevent',[EventController::class, 'save']);
     Route::get('moderate', [EventController::class,'geteventsformoderate']);
     Route::get('delete', [EventController::class,'deleteEvent']);
+    Route::get('activate', [EventController::class,'activateEvent']);
     Route::get('member', [EventController::class,'getmymemberevents']);
     Route::get('membercheck', [EventController::class,'eventmember']);
     Route::get('userauthor', [EventController::class,'eventorganize']);
