@@ -159,6 +159,19 @@ class EventController extends Controller
                 ->get();
         //}
     }
+    // Метод удаления мероприятия (для модератора)
+    public function deleteEvent(Request $data){
+        if($data['event_id'] == null){
+            abort(400,'Пустое поле id мероприятия');
+        }
+        else{
+            DB::table('event')
+                ->where('id','=',$data['event_id'])
+                ->delete();
+            abort(200,'Мероприятие удалено');
+        }
+    }
+
     // Метод записи на мероприятие
     public function eventmember(Request $data){
         if($data['event_id'] == null){
