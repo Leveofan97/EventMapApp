@@ -19,7 +19,7 @@ class EventsTableSeeder extends Seeder
             $data [] = [
                 'name'=>'Мероприятие '.$i,
                 'address'=>'Адрес'.$i,
-                'coordinates'=>'[61'.'.'.rand(230000,340000). ',73'.'.'.rand(160000,520000).']',
+                'coordinates'=>'[73'.'.'.rand(160000,520000). ',61'.'.'.rand(230000,340000).']',
                 'short_description'=>'Описание'.$i,
                 'start_at'=>'2021-04-23T18:25:43',
                 'finish_at'=>'2021-04-23T18:25:43',

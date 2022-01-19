@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class EventController extends Controller
 {
@@ -137,6 +138,52 @@ class EventController extends Controller
          $allfeatures = array('type' => 'FeatureCollection', 'features' => $features);
          return json_encode($allfeatures, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
      }
+    public function dataFilter(Request $data){
+        if (Auth::check() == null || !isset($data['private'])) $parameters[] = ['private', '=', 0];
+        else
+            $parameters[] = ['events.private', '=', $data['private']];
+        $parameters[] = ['active', '=', 1];
+
+        //    Не контролируем какие параметры приходят. Просто берем все и пытаемся делать запрос
+//        foreach($data->all() as $key => $value){
+//            if(strcmp($key, 'limit') && strcmp($key, 'offset') && isset($data[$key]))
+//                $parameters[] = [($key == 'category_id' ? 'event_category.': 'events.') . $key, '=', $value];
+//        }
+
+        if(isset($data['name']))
+            $parameters[] = ['events.name', 'LIKE', '%' . $data['name'] . '%'];
+        if(isset($data['category_id']))
+            $parameters[] = ['event_category.category_id', '=', $data['category_id']];
+        if(isset($data['max_people_count']))
+            $parameters[] = ['events.max_people_count', '=', $data['max_people_count']];
+        if(isset($data['start_at']))
+            $parameters[] = ['events.start_at', '>=', $data['start_at']];
+        if(isset($data['finish_at']))
+            $parameters[] = ['events.finish_at', '<=', $data['finish_at']];
+        if(isset($data['age_from']))
+            $parameters[] = ['events.age_from', '>=', $data['age_from']];
+        if(isset($data['age_to']))
+            $parameters[] = ['events.age_to', '<=', $data['age_to']];
+        if(isset($data['price']))
+            $parameters[] = ['events.price', '=', $data['price']];
+
+        try {
+            $res = DB::table('events')
+                        ->select(
+                            'events.id',
+                            'events.name',
+                            'events.short_description')
+                        ->where($parameters)
+                        ->limit($data['limit'])
+                        ->offset($data['offset'])
+                        ->join('event_category', 'events.id', '=', 'event_category.event_id')
+                        ->get();
+            return $res;
+        }
+        catch (\Illuminate\Database\QueryException $ex) {
+            return [];
+        }
+}
 
     // Метод вывода всех событий в которых текущий пользователь автор
      public function eventorganize(Request $data){

@@ -11,7 +11,7 @@
 
             <mdb-btn class="btn-lmap main"><p class="text-btn">Показать на карте</p></mdb-btn>
             <mdb-btn class="btn-lmap moreinfo">
-                <img class="image-card" src="https://www.flaticon.com/svg/static/icons/svg/3601/3601163.svg">
+                <img src="https://www.flaticon.com/svg/static/icons/svg/3601/3601163.svg">
             </mdb-btn>
         </mdb-card-body>
     </mdb-card>

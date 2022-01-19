@@ -24,6 +24,8 @@ class AuthController extends Controller
         ], true);
         if (!$authorized) abort(401, 'Неправильный логин или пароль');
 
+        $jwt = null;
+
         return Auth::guard('web')->user();
     }
 
@@ -35,6 +37,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        //return redirect('/');
     }
 }
