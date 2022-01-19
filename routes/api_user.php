@@ -32,6 +32,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('membercheck', [EventController::class,'eventmember']);
     Route::get('userauthor', [EventController::class,'eventorganize']);
     Route::get('memberdelete', [EventController::class,'removemember']);
+    Route::get('datafilter', [EventController::class, 'dataFilter']);
     //_____________________________________________________________//
 
     Route::group([

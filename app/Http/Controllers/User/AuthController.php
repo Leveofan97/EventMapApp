@@ -24,8 +24,6 @@ class AuthController extends Controller
         ], true);
         if (!$authorized) abort(401, 'Неправильный логин или пароль');
 
-        $jwt = null;
-
         return Auth::guard('web')->user();
     }
 
