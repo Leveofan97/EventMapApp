@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->string("email");
             $table->string("password");
             $table->string("login");
+            $table->boolean('is_active');
+            $table->boolean('is_blocked');
+            $table->boolean('is_moderator');
+            $table->boolean('is_active');
         });
     }
 
