@@ -20,7 +20,7 @@ class CreateReportsTable extends Migration
             $table->foreignId('reported_event_id')->references('id')->on('events')->cascadeOnDelete()->cascadeOnUpdate();
             $table->text("notes")->nullable();
             $table->integer("state")->nullable();
-            $table->dateTime("created_at");
+            $table->dateTime("created_date");
         });
     }
 
