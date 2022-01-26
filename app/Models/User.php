@@ -28,6 +28,13 @@ class User extends Authenticatable implements JWTSubject
 
     ];
 
+    protected $attributes = [
+        'is_active' => 0,
+        'is_blocked' => 0,
+        'is_moderator' => 0,
+        'is_verified' => 0
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
