@@ -105,6 +105,7 @@ class EventController extends Controller
         }
         return response()->json(['error' => 'Не авторизован'], 401);
     }
+    }
 
 
      // Метод вывода всех событий
