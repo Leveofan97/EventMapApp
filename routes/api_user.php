@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -26,7 +28,8 @@ Route::group([
     Route::post('logout', [JWTAuthController::class, 'logout']);
     Route::post('refresh', [JWTAuthController::class, 'refresh']);
     Route::get('me', [JWTAuthController::class, 'me']);
-
+    Route::get('google', [GoogleController::class, 'redirectToGoogle']);
+    Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
 });
 
 Route::group([
