@@ -22,6 +22,10 @@ class UsersTableSeeder extends Seeder
                 'email'=>'user'.$i.'@testmailg.ru',
                 'login'=>'Aboba'.$i,
                 'password'=>bcrypt('1234567'),
+                'is_active' => 1,
+                'is_blocked' => 0,
+                'is_moderator' => 0,
+                'is_verified' => 0,
             ];
         }
         DB::table('users')->insert($data);

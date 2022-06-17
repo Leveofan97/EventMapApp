@@ -27,9 +27,13 @@ Route::group([
     Route::post('logout', [JWTAuthController::class, 'logout']);
     Route::post('refresh', [JWTAuthController::class, 'refresh']);
     Route::get('me', [JWTAuthController::class, 'me']);
+
 });
 
-Route::group(['prefix' => 'user'], function () {
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'user'
+], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('registration',[RegisterController::class, 'create']);

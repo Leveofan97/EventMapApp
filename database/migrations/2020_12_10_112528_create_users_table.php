@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active');
             $table->boolean('is_blocked');
             $table->boolean('is_moderator');
-            $table->boolean('is_active');
+            $table->boolean('is_verified');
         });
     }
 
