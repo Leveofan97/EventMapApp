@@ -36,12 +36,11 @@ class EventController extends Controller
     }
     // Метод сохранения мероприятий
     protected function save(Request $data){
-
         if(Auth::check()) {
-
-            if ($data['category_id'] == null) {
-                abort(400, 'Пустое поле категории');
-            } else {
+            if($data['category_id'] == null && $data['file']){
+                abort(400,'Пустое поле категории');
+            }
+            else {
                 $id = DB::table('events')->insertGetId([
                     'name' => $data['name'],
                     'address' => $data['address'],
@@ -55,56 +54,30 @@ class EventController extends Controller
                     'private' => $data['private'],
                     'active' => 0,
                     'price' => $data['price'],
-                    'age_from' => $data['age_from'],
-                    'age_to' => $data['age_to'],
+                    'age_from'=>$data['age_from'],
+                    'age_to'=>$data['age_to'],
                 ]);
-
+                $folder = Config::get('filesystems.y_folder_event');
+                $path = $data->file('file')->store($folder, 'yandexcloud');
+                $ori_url = Storage::disk('yandexcloud')->url($path);
                 DB::table('event_category')->insert([
-                    'event_id' => $id,
-                    'category_id' => $data['category_id']
+                    'event_id'=>$id,
+                    'category_id'=>$data['category_id']
+                ]);
+                $id_attachnemt= DB::table('attachments')->insertGetId([
+                    'name'=>"test",
+                    'original'=>$ori_url,
+                    'thumbnail'=>'test',
+                    'type'=>'jpg'
+                ]);
+                DB::table('event_attachment')->insert([
+                    'attachment_id'=>$id_attachnemt,
+                    'event_id'=>$id
                 ]);
             }
-
-        if($data['category_id'] == null && $data['file']){
-            abort(400,'Пустое поле категории');
-        }
-        else{
-            $id = DB::table('events')->insertGetId([
-                'name' => $data['name'],
-                'address' => $data['address'],
-                'coordinates' => $data['coordinates'],
-                'short_description' => $data['short_description'],
-                'full_description' => $data['full_description'],
-                'start_at' => $data['start_at'],
-                'max_people_count' => $data['max_people_count'],
-                'finish_at' => $data['finish_at'],
-                'author_id' => $data['author_id'],
-                'private' => $data['private'],
-                'active' => 0,
-                'price' => $data['price'],
-                'age_from'=>$data['age_from'],
-                'age_to'=>$data['age_to'],
-            ]);
-            $folder = Config::get('filesystems.y_folder_event');
-            $path = $data->file('file')->store($folder, 'yandexcloud');
-            $ori_url = Storage::disk('yandexcloud')->url($path);
-            DB::table('event_category')->insert([
-                'event_id'=>$id,
-                'category_id'=>$data['category_id']
-            ]);
-            $id_attachnemt= DB::table('attachments')->insertGetId([
-                'name'=>"test",
-                'original'=>$ori_url,
-                'thumbnail'=>'test',
-                'type'=>'jpg'
-            ]);
-            DB::table('event_attachment')->insert([
-                'attachment_id'=>$id_attachnemt,
-                'event_id'=>$id
-            ]);
+            return response()->json(['message' => 'Успешно!'], 200);
         }
         return response()->json(['error' => 'Не авторизован'], 401);
-    }
     }
 
 
@@ -248,7 +221,7 @@ class EventController extends Controller
                 abort(400,'Пустое поле id мероприятия');
             }
             else{
-                DB::table('event')
+                DB::table('events')
                     ->where('id','=',$data['event_id'])
                     ->delete();
                 abort(200,'Мероприятие удалено');
@@ -264,7 +237,7 @@ class EventController extends Controller
                 abort(400,'Пустое поле id мероприятия');
             }
             else{
-                DB::table('event')
+                DB::table('events')
                     ->where('id', '=', $data['event_id'])
                     ->update(['active' => 1]);
                 abort(200,'Мероприятие опубликовано');

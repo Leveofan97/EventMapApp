@@ -26,7 +26,7 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'login',
         'password',
-
+        'google_id'
     ];
 
     protected $attributes = [
@@ -71,5 +71,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getLogin(){
+        return $this->attributes["login"];
     }
 }
