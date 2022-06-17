@@ -64,6 +64,15 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'yandexcloud' => [
+            'driver' => 's3',
+            'key' => env('Y_AWS_ACCESS_KEY_ID'),
+            'secret' => env('Y_AWS_SECRET_ACCESS_KEY'),
+            'endpoint' => 'http://storage.yandexcloud.net/',
+            'region' => 'us-west-2',
+            'bucket' => env('Y_AWS_BUCKET'),
+            'url' => 'http://storage.yandexcloud.net/cloud-eventsmap/',
+        ],
 
     ],
 
@@ -81,5 +90,9 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
+    // custom
+    'y_folder_event'=>env('Y_BUCKET_FOLDER_EVENT'),
+    'y_folder_user'=>env('Y_BUCKET_FOLDER_USER')
 
 ];

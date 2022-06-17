@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Aws\S3\S3Client;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
 
@@ -33,7 +36,8 @@ class EventController extends Controller
     }
     // Метод сохранения мероприятий
     protected function save(Request $data){
-        if($data['category_id'] == null){
+
+        if($data['category_id'] == null && $data['file']){
             abort(400,'Пустое поле категории');
         }
         else{
@@ -53,13 +57,26 @@ class EventController extends Controller
                 'age_from'=>$data['age_from'],
                 'age_to'=>$data['age_to'],
             ]);
-
+            $folder = Config::get('filesystems.y_folder_event');
+            $path = $data->file('file')->store($folder, 'yandexcloud');
+            $ori_url = Storage::disk('yandexcloud')->url($path);
             DB::table('event_category')->insert([
                 'event_id'=>$id,
                 'category_id'=>$data['category_id']
             ]);
+            $id_attachnemt= DB::table('attachments')->insertGetId([
+                'name'=>"test",
+                'original'=>$ori_url,
+                'thumbnail'=>'test',
+                'type'=>'jpg'
+            ]);
+            DB::table('event_attachment')->insert([
+                'attachment_id'=>$id_attachnemt,
+                'event_id'=>$id
+            ]);
         }
     }
+
 
      // Метод вывода всех событий
      public function index(Request $data)
@@ -84,37 +101,31 @@ class EventController extends Controller
          }else {
              $prm = [];
              $prm[] = $data['id'];
-             return DB::table('events')
-                 ->select(
-                     'events.id',
-                     'events.name',
-                     'events.address',
-                     'events.coordinates',
-                     'events.full_description',
-                     'events.short_description',
-                     'events.max_people_count',
-                     'events.start_at',
-                     'events.finish_at',
-                     'events.author_id',
-                     'events.private',
-                     'events.age_from',
-                     'events.age_to',
-                     'events.price',
-                     'events.insta_link',
-                     'events.site_link',
-                     'events.vk_link',
-                     'events.rating',
-                     'categories.title_category')
-                 ->where('events.id','=',$prm)
-                 ->join('event_category', 'events.id', '=', 'event_category.event_id')
+             $result = DB::table('events')
+                 ->select('*')
+                 ->first();
+             $result -> categories_event = DB::table('event_category')
+                 ->select('categories.title_category','categories.color')
+                 ->where('event_category.event_id','=',$prm)
+                 // ищим в таблице event_category id = id из таблицы events
                  ->join('categories', 'event_category.category_id', '=', 'categories.id')
                  ->get();
+            $result -> attachments_info = DB::table('event_attachment')
+                ->select(
+                    'attachments.name',
+                    'attachments.original',
+                    'attachments.thumbnail',
+                    'attachments.type'
+                )
+                ->where('event_attachment.event_id', '=', $prm)
+                // ищим в таблице event_category id = id из таблицы events
+                ->join('attachments', 'event_attachment.attachment_id', '=', 'attachments.id')
+                ->get();
+            return $result;
          }
      }
      public function getMarkers(){
          $test =  DB::table('events')
-             //->join('event_category', 'events.id', '=', 'event_category.event_id')
-             //->join('categories', 'event_category.category_id', '=', 'categories.id')
              ->get();
          $original_data = json_decode($test, true);
          //var_dump($original_data);
@@ -143,12 +154,6 @@ class EventController extends Controller
         else
             $parameters[] = ['events.private', '=', $data['private']];
         $parameters[] = ['active', '=', 1];
-
-        //    Не контролируем какие параметры приходят. Просто берем все и пытаемся делать запрос
-//        foreach($data->all() as $key => $value){
-//            if(strcmp($key, 'limit') && strcmp($key, 'offset') && isset($data[$key]))
-//                $parameters[] = [($key == 'category_id' ? 'event_category.': 'events.') . $key, '=', $value];
-//        }
 
         if(isset($data['name']))
             $parameters[] = ['events.name', 'LIKE', '%' . $data['name'] . '%'];
@@ -200,11 +205,9 @@ class EventController extends Controller
 
     // Метод вывода всех неактивных событий
     public function geteventsformoderate(){
-        //if (Auth::check()) {
             return DB::table('events')
                 ->where('active','=',0)
                 ->get();
-        //}
     }
     // Метод удаления мероприятия (для модератора)
     public function deleteEvent(Request $data){

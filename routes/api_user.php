@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('userauthor', [EventController::class,'eventorganize']);
     Route::get('memberdelete', [EventController::class,'removemember']);
     Route::get('datafilter', [EventController::class, 'dataFilter']);
+    Route::post('refresh_data', [UserController::class, 'update']);
     //_____________________________________________________________//
 
 
