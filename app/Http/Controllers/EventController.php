@@ -57,23 +57,23 @@ class EventController extends Controller
                     'age_from'=>$data['age_from'],
                     'age_to'=>$data['age_to'],
                 ]);
-                //$folder = Config::get('filesystems.y_folder_event');
-                //$path = $data->file('file')->store($folder, 'yandexcloud');
-                //$ori_url = Storage::disk('yandexcloud')->url($path);
+                $folder = Config::get('filesystems.y_folder_event');
+                $path = $data->file('file')->store($folder, 'yandexcloud');
+                $ori_url = Storage::disk('yandexcloud')->url($path);
                 DB::table('event_category')->insert([
                     'event_id'=>$id,
                     'category_id'=>$data['category_id']
                 ]);
-                //$id_attachnemt= DB::table('attachments')->insertGetId([
-                //    'name'=>"test",
-                //    'original'=>$ori_url,
-                //    'thumbnail'=>'test',
-                //    'type'=>'jpg'
-                //]);
-               //DB::table('event_attachment')->insert([
-               //    'attachment_id'=>$id_attachnemt,
-               //    'event_id'=>$id
-               //]);
+                $id_attachnemt= DB::table('attachments')->insertGetId([
+                    'name'=>"test",
+                    'original'=>$ori_url,
+                    'thumbnail'=>'test',
+                    'type'=>'jpg'
+                ]);
+                DB::table('event_attachment')->insert([
+                    'attachment_id'=>$id_attachnemt,
+                    'event_id'=>$id
+                ]);
             }
             return response()->json(['message' => 'Успешно!'], 200);
         }
@@ -344,5 +344,14 @@ class EventController extends Controller
             }
         }
         return response()->json(['error' => 'Не авторизован'], 401);
+    }
+
+    public function showreport(){
+        if(Auth::check()){
+        return DB::table('reports')
+            ->select('*')
+            ->get();
+        }
+        return response()->json(['error'=>'Не авторизован']);
     }
 }

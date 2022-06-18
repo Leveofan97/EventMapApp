@@ -55,6 +55,7 @@ Route::group([
     Route::get('datafilter', [EventController::class, 'dataFilter']);
     Route::post('refresh_data', [UserController::class, 'update']);
     Route::post('report', [EventController::class, 'report']);
+    Route::get('getreports', [EventController::class, 'showreport']);
     //_____________________________________________________________//
 });
 
