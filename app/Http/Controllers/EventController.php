@@ -57,23 +57,23 @@ class EventController extends Controller
                     'age_from'=>$data['age_from'],
                     'age_to'=>$data['age_to'],
                 ]);
-                $folder = Config::get('filesystems.y_folder_event');
-                $path = $data->file('file')->store($folder, 'yandexcloud');
-                $ori_url = Storage::disk('yandexcloud')->url($path);
+                //$folder = Config::get('filesystems.y_folder_event');
+                //$path = $data->file('file')->store($folder, 'yandexcloud');
+                //$ori_url = Storage::disk('yandexcloud')->url($path);
                 DB::table('event_category')->insert([
                     'event_id'=>$id,
                     'category_id'=>$data['category_id']
                 ]);
-                $id_attachnemt= DB::table('attachments')->insertGetId([
-                    'name'=>"test",
-                    'original'=>$ori_url,
-                    'thumbnail'=>'test',
-                    'type'=>'jpg'
-                ]);
-                DB::table('event_attachment')->insert([
-                    'attachment_id'=>$id_attachnemt,
-                    'event_id'=>$id
-                ]);
+                //$id_attachnemt= DB::table('attachments')->insertGetId([
+                //    'name'=>"test",
+                //    'original'=>$ori_url,
+                //    'thumbnail'=>'test',
+                //    'type'=>'jpg'
+                //]);
+               //DB::table('event_attachment')->insert([
+               //    'attachment_id'=>$id_attachnemt,
+               //    'event_id'=>$id
+               //]);
             }
             return response()->json(['message' => 'Успешно!'], 200);
         }
@@ -326,5 +326,23 @@ class EventController extends Controller
         return DB::table('events')
             ->where('name','LIKE', '%' . $search . '%')
             ->get();
+    }
+
+    public function report(Request $data){
+        if (Auth::check()){
+            if (($data['reported_user_id'] && $data['reported_event_id'])== null){
+                return response()->json(['error' => 'Необходимы id пользователя и мероприятия'], 400);
+            }else{
+                DB::table('reports')->insert([
+                    'reported_user_id'=>$data['reported_user_id'],
+                    'reported_event_id'=>$data['reported_event_id'],
+                    'notes'=>$data['notes'],
+                    'state'=> 0,
+                    'created_date'=> date('Y-m-d H:i:s'),
+                ]);
+                return response()->json(['message' => 'Репорт сохранен!'], 200);
+            }
+        }
+        return response()->json(['error' => 'Не авторизован'], 401);
     }
 }

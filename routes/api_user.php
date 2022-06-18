@@ -54,9 +54,8 @@ Route::group([
     Route::get('memberdelete', [EventController::class,'removemember']);
     Route::get('datafilter', [EventController::class, 'dataFilter']);
     Route::post('refresh_data', [UserController::class, 'update']);
+    Route::post('report', [EventController::class, 'report']);
     //_____________________________________________________________//
-
-
 });
 
 
