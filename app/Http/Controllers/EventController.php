@@ -34,11 +34,98 @@ class EventController extends Controller
        return DB::table('categories')
            ->get();
     }
-    // Метод сохранения мероприятий
+    // Метод сохранения мероприятий с логикой если файл пустой
+ //  protected function save(Request $data){
+ //      if(Auth::check()) {
+ //          if($data['category_id'] == null){
+ //              return response()->json(['Пустая категория'], 400);
+ //          }
+ //          if($data['file'] == null){
+ //              $id = DB::table('events')->insertGetId([
+ //                  'name' => $data['name'],
+ //                  'address' => $data['address'],
+ //                  'coordinates' => $data['coordinates'],
+ //                  'short_description' => $data['short_description'],
+ //                  'full_description' => $data['full_description'],
+ //                  'start_at' => $data['start_at'],
+ //                  'max_people_count' => $data['max_people_count'],
+ //                  'finish_at' => $data['finish_at'],
+ //                  'author_id' => $data['author_id'],
+ //                  'private' => $data['private'],
+ //                  'active' => 0,
+ //                  'price' => $data['price'],
+ //                  'age_from'=>$data['age_from'],
+ //                  'age_to'=>$data['age_to'],
+ //              ]);
+ //              DB::table('event_category')->insert([
+ //                  'event_id'=>$id,
+ //                  'category_id'=>$data['category_id']
+ //              ]);
+
+ //              return response()->json(['message' => 'Мероприятие сохранено без картинок!'], 200);
+ //          }else{
+ //              $id = DB::table('events')->insertGetId([
+ //                  'name' => $data['name'],
+ //                  'address' => $data['address'],
+ //                  'coordinates' => $data['coordinates'],
+ //                  'short_description' => $data['short_description'],
+ //                  'full_description' => $data['full_description'],
+ //                  'start_at' => $data['start_at'],
+ //                  'max_people_count' => $data['max_people_count'],
+ //                  'finish_at' => $data['finish_at'],
+ //                  'author_id' => $data['author_id'],
+ //                  'private' => $data['private'],
+ //                  'active' => 0,
+ //                  'price' => $data['price'],
+ //                  'age_from'=>$data['age_from'],
+ //                  'age_to'=>$data['age_to'],
+ //              ]);
+ //              $folder = Config::get('filesystems.y_folder_event');
+ //              $allowedfileExtension=['jpg','png'];
+ //              $files = $data->file('file');
+ //              $errors = [];
+ //              foreach ($files as $file) {
+
+ //                  $extension = $file->getClientOriginalExtension();
+
+ //                  $check = in_array($extension,$allowedfileExtension);
+
+ //                  if($check) {
+ //                      foreach($data->file as $mediaFiles) {
+
+ //                          $path = $mediaFiles->store($folder, 'yandexcloud');
+ //                          $ori_url = Storage::disk('yandexcloud')->url($path);
+
+ //                          $id_attachnemt= DB::table('attachments')->insertGetId([
+ //                              'name'=>"test",
+ //                              'original'=>$ori_url,
+ //                              'thumbnail'=>'test',
+ //                              'type'=>'jpg'
+ //                          ]);
+ //                          DB::table('event_attachment')->insert([
+ //                              'attachment_id'=>$id_attachnemt,
+ //                              'event_id'=>$id
+ //                          ]);
+ //                      }
+ //                  } else {
+ //                      return response()->json(['invalid_file_format'], 422);
+ //                  }
+ //                  return response()->json(['file_uploaded'], 200);
+ //              }
+ //              DB::table('event_category')->insert([
+ //                  'event_id'=>$id,
+ //                  'category_id'=>$data['category_id']
+ //              ]);
+ //              return response()->json(['message' => 'Мероприятие сохраненно с картинками!'], 200);
+ //          }
+ //      }
+ //      return response()->json(['error' => 'Не авторизован'], 401);
+ //  }
+
     protected function save(Request $data){
         if(Auth::check()) {
             if($data['category_id'] == null && $data['file']){
-                abort(400,'Пустое поле категории');
+                abort(400,'Пустое поле категории или файл');
             }
             else {
                 $id = DB::table('events')->insertGetId([
@@ -58,21 +145,40 @@ class EventController extends Controller
                     'age_to'=>$data['age_to'],
                 ]);
                 $folder = Config::get('filesystems.y_folder_event');
-                $path = $data->file('file')->store($folder, 'yandexcloud');
-                $ori_url = Storage::disk('yandexcloud')->url($path);
+                $allowedfileExtension=['jpg','png'];
+                $files = $data->file('file');
+                $errors = [];
+                foreach ($files as $file) {
+
+                    $extension = $file->getClientOriginalExtension();
+
+                    $check = in_array($extension,$allowedfileExtension);
+
+                    if($check) {
+                        foreach($data->file as $mediaFiles) {
+
+                            $path = $mediaFiles->store($folder, 'yandexcloud');
+                            $ori_url = Storage::disk('yandexcloud')->url($path);
+
+                            $id_attachnemt= DB::table('attachments')->insertGetId([
+                                'name'=>"test",
+                                'original'=>$ori_url,
+                                'thumbnail'=>'test',
+                                'type'=>'jpg'
+                            ]);
+                            DB::table('event_attachment')->insert([
+                                'attachment_id'=>$id_attachnemt,
+                                'event_id'=>$id
+                            ]);
+                        }
+                    } else {
+                        return response()->json(['invalid_file_format'], 422);
+                    }
+                    return response()->json(['file_uploaded'], 200);
+                }
                 DB::table('event_category')->insert([
                     'event_id'=>$id,
                     'category_id'=>$data['category_id']
-                ]);
-                $id_attachnemt= DB::table('attachments')->insertGetId([
-                    'name'=>"test",
-                    'original'=>$ori_url,
-                    'thumbnail'=>'test',
-                    'type'=>'jpg'
-                ]);
-                DB::table('event_attachment')->insert([
-                    'attachment_id'=>$id_attachnemt,
-                    'event_id'=>$id
                 ]);
             }
             return response()->json(['message' => 'Успешно!'], 200);
